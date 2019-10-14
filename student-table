@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace ConsoleApp3
+{
+    using System.Data;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //creating a table
+            DataTable dt = new DataTable();
+            dt.Columns.Add("name");
+            dt.Columns.Add("Avrage", typeof(float));
+            dt.Columns.Add("Current Year", typeof(int));
+            dt.Columns.Add("Active", typeof(bool));
+            //adding a row
+            DataRow dr1 = dt.NewRow();
+            dr1["name"] = "avi";
+            dr1["Avrage"] = 84.1;
+            dr1["Current Year"] = 2;
+            dr1["Active"] = true;
+            dt.Rows.Add(dr1);
+            //adding a row
+            DataRow dr2 = dt.NewRow();
+            dr2["name"] = "liat";
+            dr2["Avrage"] = 88.1;
+            dr2["Current Year"] = 3;
+            dr2["Active"] = false;
+            dt.Rows.Add(dr2);
+            //adding a row
+            DataRow dr3 = dt.NewRow();
+            dr3["name"] = "daniel";
+            dr3["Avrage"] = 65;
+            dr3["Current Year"] = 3;
+            dr3["Active"] = true;
+            dt.Rows.Add(dr3);
+
+            int count = 0;
+            bool con = false;
+
+            foreach(DataRow tr in dt.Rows)
+            {
+                //count all the students 
+                count++;
+            }
+            Console.WriteLine("There is: " + count + " student overall ");
+            foreach (DataRow tr in dt.Rows)
+                //finding all the students that studiyng more then two years and are active
+            {
+                if ((Convert.ToInt32(tr[2]) > 2) && (Convert.ToBoolean(tr[3]) == true))
+                {
+                    con = true;
+                    Console.WriteLine($"The following students studied for more than 2 years and are active: {tr[0]}");
+                    
+                }
+                
+
+            }
+            // if there is no students thet follow the conditions
+            if (con == false)
+            {
+                Console.WriteLine("There are no student that answer the conditions");
+            }
+           
+            
+
+        }
+    }
+}
